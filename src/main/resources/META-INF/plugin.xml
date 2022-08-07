@@ -1,0 +1,72 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>me.xfcy.idea.CopyThePathLegacy</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Copy The Path Legacy</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="xfcypc@foxmail.com" url="https://www.cyouth.cn/">CYouth Wang</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+The function for this plugin is to copy the relative path from the project root directory of the files which has been opened in the editor. <br>
+This is a Legacy version plugin, compatible with version 139-211.* <br>
+Highly recommend using current version Copy The Path without "Legacy" if you are using idea 201+ <br>
+This version will deprecate soon. <br>
+[Usage]<br>
+menu bar->Tools->Copy The Path->Copy The Path<br>
+or binding shortcut like ctrl+shift+c.<br>
+Then paste it to anywhere you want.<br>
+Plugin icon is from RemixIcon.<br>
+<a href="https://github.com/xfcy/CopyThePathLegacy">https://github.com/xfcy/CopyThePathLegacy</a> <br>
+<br>
+这个插件可以复制编辑器中打开的文件相对于其所在项目根目录的相对路径。<br>
+这是一个兼容139-211.*版本的插件，如果你正在使用201+版本的idea，强烈建议切换到不带“Legacy”的Copy The Path插件。 <br>
+Legacy 版本将停止维护。
+[使用方式]<br>
+菜单栏->Tools->Copy The Path->Copy The Path<br>
+或者给他绑定一个快捷键，比如 ctrl+shift+c<br>
+然后在需要使用的地方粘贴。<br>
+插件图标来自RemixIcon。<br>
+<a href="https://github.com/xfcy/CopyThePathLegacy">https://github.com/xfcy/CopyThePathLegacy</a> <br>
+  ]]></description>
+
+    <change-notes><![CDATA[
+1. Add "Copy Project Root" action(<a href="https://github.com/xfcy/CopyThePath/issues/1">issue #1</a>), now you can find it in menu bar, or binding a shortcut. <br>
+2. Use new plugin id, remove "l" in version code. <br>
+3. Fix some bugs and typo. <br>
+    ]]></change-notes>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable parentId="tools" displayName="CopyThePath" id="tools.ChenY.CopyThePath" instance="me.xfcy.idea.copythepathlegacy.setting.SettingConfigurable" />
+        <projectService serviceImplementation="me.xfcy.idea.copythepathlegacy.setting.SettingState" />
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="me.xfcy.idea.copythepathlegacy.action_group"
+               text="Copy the Path"
+               popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <action id="me.xfcy.idea.copythepathlegacy.action.CopyAction"
+                    class="me.xfcy.idea.copythepathlegacy.action.CopyAction"
+                    text="_Copy the Path" description="Copy the Path">
+            </action>
+            <action id="me.xfcy.idea.copythepathlegacy.action.CopyProjectRootAction"
+                    class="me.xfcy.idea.copythepathlegacy.action.CopyProjectRootAction"
+                    text="Copy _Project Root" description="Copy project root">
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
